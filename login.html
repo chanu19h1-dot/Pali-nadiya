@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chanu Study Login</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+body{font-family:system-ui;background:#f3f0ff;display:flex;justify-content:center;padding-top:60px;margin:0}
+.box{background:#fff;padding:28px;border-radius:18px;width:88%;max-width:360px;box-shadow:0 8px 25px rgba(0,0,0,0.1)}
+input{width:92%;padding:13px;margin:8px 0;border-radius:10px;border:1px solid #ddd;font-size:15px}
+button{width:100%;padding:14px;background:#5b3fd1;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>Chanu Study Login</h2>
+<input id="name" placeholder="Apna Naam">
+<input id="mobile" placeholder="Mobile Number">
+<button onclick="login()">Login Karo</button>
+<p id="msg" style="color:green;text-align:center"></p>
+</div>
+<script>
+const SUPABASE_URL = "https://hkkgyaduqyhqbhwwhgew.supabase.co";
+const SUPABASE_KEY = "sb_publishable_3zo2B5vr9o4bJy38ypQMSQ_ABGzw6wS";
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+async function login(){
+  let n = document.getElementById('name').value.trim();
+  let m = document.getElementById('mobile').value.trim();
+  if(!n || !m){ alert("Naam aur Mobile bharo"); return; }
+  document.getElementById('msg').innerText = "Saving...";
+  let { error } = await client.from('students').insert([{ name: n, mobile: m }]);
+  if(error){ document.getElementById('msg').innerText = "Error: " + error.message; }
+  else { localStorage.setItem('student', n); document.getElementById('msg').innerText = "Success!"; window.location.href = 'index.html'; }
+}
+</script>
+</body>
+  </html>
