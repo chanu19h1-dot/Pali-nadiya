@@ -1,0 +1,610 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chanu Study - Courses</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#f5f7fb;
+  color:#182033;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+  color:white;
+  padding:20px;
+  border-radius:0 0 25px 25px;
+  box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.teacher{
+  font-size:13px;
+  opacity:.9;
+}
+
+.header-title{
+  margin-top:22px;
+}
+
+.header-title h1{
+  font-size:26px;
+}
+
+.header-title p{
+  margin-top:6px;
+  opacity:.85;
+}
+
+/* MAIN */
+.container{
+  padding:20px;
+  max-width:1000px;
+  margin:auto;
+}
+
+/* ADD BUTTON */
+.add-btn{
+  width:100%;
+  padding:16px;
+  border:0;
+  border-radius:15px;
+  background:#fff;
+  color:#4f46e5;
+  font-size:17px;
+  font-weight:bold;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  cursor:pointer;
+  margin-bottom:22px;
+}
+
+.add-btn:active{
+  transform:scale(.98);
+}
+
+/* FORM */
+.form-box{
+  display:none;
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+  margin-bottom:25px;
+}
+
+.form-box h2{
+  margin-bottom:18px;
+}
+
+input, textarea, select{
+  width:100%;
+  padding:13px;
+  margin-bottom:13px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  outline:none;
+  font-size:15px;
+}
+
+textarea{
+  height:90px;
+  resize:none;
+}
+
+.save-btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:#4f46e5;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* COURSE GRID */
+.course-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+
+.course-card{
+  background:white;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+
+.course-img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  background:#e5e7eb;
+}
+
+.course-content{
+  padding:17px;
+}
+
+.course-content h3{
+  font-size:19px;
+  margin-bottom:7px;
+}
+
+.course-content p{
+  color:#6b7280;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.subject{
+  display:inline-block;
+  margin:10px 0;
+  padding:6px 10px;
+  background:#eef2ff;
+  color:#4f46e5;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.price{
+  font-size:18px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:15px;
+}
+
+.actions button{
+  flex:1;
+  padding:10px;
+  border:0;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.edit{
+  background:#eef2ff;
+  color:#4f46e5;
+}
+
+.delete{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+/* EMPTY */
+.empty{
+  text-align:center;
+  padding:45px 20px;
+  color:#777;
+}
+
+.empty-icon{
+  font-size:50px;
+  margin-bottom:10px;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .container{
+    padding:15px;
+  }
+
+  .course-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="header-top">
+    <div class="logo">📚 Chanu Study</div>
+    <div class="teacher">Teacher Panel</div>
+  </div>
+
+  <div class="header-title">
+    <h1>My Courses</h1>
+    <p>Create and manage your courses</p>
+  </div>
+
+</header>
+
+
+<div class="container">
+
+  <!-- NEW COURSE BUTTON -->
+
+  <button class="add-btn" onclick="openForm()">
+    ➕ Create New Course
+  </button>
+
+
+  <!-- COURSE FORM -->
+
+  <div class="form-box" id="courseForm">
+
+    <h2 id="formTitle">Create New Course</h2>
+
+    <input
+      type="text"
+      id="courseName"
+      placeholder="Course Name"
+    >
+
+    <input
+      type="text"
+      id="subject"
+      placeholder="Subject / Class"
+    >
+
+    <textarea
+      id="description"
+      placeholder="Course description..."
+    ></textarea>
+
+    <select id="priceType">
+      <option value="Free">Free Course</option>
+      <option value="Paid">Paid Course</option>
+    </select>
+
+    <input
+      type="number"
+      id="price"
+      placeholder="Price (₹) - Paid course ke liye"
+    >
+
+    <input
+      type="text"
+      id="image"
+      placeholder="Course Image URL"
+    >
+
+    <button class="save-btn" onclick="saveCourse()">
+      💾 Save Course
+    </button>
+
+  </div>
+
+
+  <!-- COURSE LIST -->
+
+  <div id="courseList" class="course-grid"></div>
+
+</div>
+
+
+<script>
+
+let courses = JSON.parse(localStorage.getItem("chanuCourses")) || [];
+
+let editIndex = -1;
+
+
+/* OPEN FORM */
+
+function openForm(){
+
+  document.getElementById("courseForm").style.display = "block";
+
+  document.getElementById("courseName").focus();
+
+}
+
+
+/* SAVE COURSE */
+
+function saveCourse(){
+
+  const name =
+    document.getElementById("courseName").value.trim();
+
+  const subject =
+    document.getElementById("subject").value.trim();
+
+  const description =
+    document.getElementById("description").value.trim();
+
+  const priceType =
+    document.getElementById("priceType").value;
+
+  const price =
+    document.getElementById("price").value;
+
+  const image =
+    document.getElementById("image").value.trim();
+
+
+  if(!name){
+
+    alert("Please enter course name");
+
+    return;
+
+  }
+
+
+  const course = {
+
+    name:name,
+
+    subject:subject || "General",
+
+    description:
+      description || "Welcome to this course.",
+
+    priceType:priceType,
+
+    price:
+      priceType === "Free"
+      ? "Free"
+      : "₹" + (price || "0"),
+
+    image:
+      image ||
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
+
+  };
+
+
+  if(editIndex === -1){
+
+    courses.push(course);
+
+  }else{
+
+    courses[editIndex] = course;
+
+    editIndex = -1;
+
+    document.getElementById("formTitle").innerText =
+      "Create New Course";
+
+  }
+
+
+  localStorage.setItem(
+    "chanuCourses",
+    JSON.stringify(courses)
+  );
+
+
+  clearForm();
+
+  document.getElementById("courseForm").style.display = "none";
+
+  displayCourses();
+
+}
+
+
+/* DISPLAY COURSES */
+
+function displayCourses(){
+
+  const list =
+    document.getElementById("courseList");
+
+
+  if(courses.length === 0){
+
+    list.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">📚</div>
+
+        <h3>No Courses Yet</h3>
+
+        <p>Create your first course using the button above.</p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML = "";
+
+
+  courses.forEach((course,index)=>{
+
+    list.innerHTML += `
+
+      <div class="course-card">
+
+        <img
+          class="course-img"
+          src="${course.image}"
+          onerror="this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80'"
+        >
+
+        <div class="course-content">
+
+          <span class="subject">
+            ${course.subject}
+          </span>
+
+          <h3>
+            ${course.name}
+          </h3>
+
+          <p>
+            ${course.description}
+          </p>
+
+          <div class="price">
+            ${course.price}
+          </div>
+
+          <div class="actions">
+
+            <button
+              class="edit"
+              onclick="editCourse(${index})"
+            >
+              ✏️ Edit
+            </button>
+
+            <button
+              class="delete"
+              onclick="deleteCourse(${index})"
+            >
+              🗑️ Delete
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+/* EDIT */
+
+function editCourse(index){
+
+  const course = courses[index];
+
+  document.getElementById("courseForm").style.display =
+    "block";
+
+  document.getElementById("formTitle").innerText =
+    "Edit Course";
+
+  document.getElementById("courseName").value =
+    course.name;
+
+  document.getElementById("subject").value =
+    course.subject;
+
+  document.getElementById("description").value =
+    course.description;
+
+  document.getElementById("priceType").value =
+    course.priceType;
+
+  document.getElementById("price").value =
+    course.priceType === "Paid"
+    ? course.price.replace("₹","")
+    : "";
+
+  document.getElementById("image").value =
+    course.image;
+
+  editIndex = index;
+
+  window.scrollTo({
+    top:250,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* DELETE */
+
+function deleteCourse(index){
+
+  const confirmDelete =
+    confirm("Delete this course?");
+
+  if(!confirmDelete) return;
+
+
+  courses.splice(index,1);
+
+
+  localStorage.setItem(
+    "chanuCourses",
+    JSON.stringify(courses)
+  );
+
+
+  displayCourses();
+
+}
+
+
+/* CLEAR FORM */
+
+function clearForm(){
+
+  document.getElementById("courseName").value = "";
+
+  document.getElementById("subject").value = "";
+
+  document.getElementById("description").value = "";
+
+  document.getElementById("priceType").value = "Free";
+
+  document.getElementById("price").value = "";
+
+  document.getElementById("image").value = "";
+
+}
+
+
+/* LOAD */
+
+displayCourses();
+
+</script>
+
+</body>
+</html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html>

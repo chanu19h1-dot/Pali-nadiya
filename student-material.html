@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html><!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Material | Chanu Study</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f4f7fb;
+  color:#172033;
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#4f46e5,#2563eb);
+  color:white;
+  padding:22px 18px;
+  border-radius:0 0 25px 25px;
+}
+
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.header h1{
+  font-size:25px;
+}
+
+.header p{
+  margin-top:7px;
+  opacity:.9;
+  font-size:14px;
+}
+
+.profile{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:white;
+  color:#2563eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+/* SEARCH */
+.search-box{
+  margin:18px;
+  position:relative;
+}
+
+.search-box input{
+  width:100%;
+  padding:15px 18px 15px 45px;
+  border:none;
+  border-radius:15px;
+  outline:none;
+  background:white;
+  box-shadow:0 4px 15px rgba(0,0,0,.06);
+  font-size:14px;
+}
+
+.search-icon{
+  position:absolute;
+  left:16px;
+  top:14px;
+  font-size:18px;
+}
+
+/* CATEGORY */
+.categories{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:0 18px 15px;
+}
+
+.categories button{
+  border:none;
+  padding:10px 17px;
+  border-radius:20px;
+  background:white;
+  color:#555;
+  white-space:nowrap;
+  cursor:pointer;
+}
+
+.categories button.active{
+  background:#4f46e5;
+  color:white;
+}
+
+/* SECTION */
+.section{
+  padding:8px 18px;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.section-title h2{
+  font-size:20px;
+}
+
+.section-title span{
+  color:#4f46e5;
+  font-size:13px;
+}
+
+/* COURSE */
+.course{
+  background:white;
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:15px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.course-top{
+  display:flex;
+  gap:13px;
+  align-items:center;
+}
+
+.course-icon{
+  width:55px;
+  height:55px;
+  border-radius:15px;
+  background:#eef2ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+}
+
+.course h3{
+  font-size:16px;
+}
+
+.course small{
+  color:#777;
+  display:block;
+  margin-top:5px;
+}
+
+.progress{
+  height:7px;
+  background:#e5e7eb;
+  border-radius:10px;
+  margin:15px 0 8px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:65%;
+  background:#4f46e5;
+}
+
+.course-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.course-bottom span{
+  font-size:12px;
+  color:#666;
+}
+
+.open-btn{
+  border:none;
+  background:#4f46e5;
+  color:white;
+  padding:9px 16px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* MATERIAL GRID */
+.material-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.material{
+  background:white;
+  padding:18px 12px;
+  border-radius:17px;
+  text-align:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.05);
+  cursor:pointer;
+  transition:.2s;
+}
+
+.material:active{
+  transform:scale(.97);
+}
+
+.material-icon{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.material h3{
+  font-size:14px;
+}
+
+.material p{
+  color:#777;
+  font-size:11px;
+  margin-top:5px;
+}
+
+/* LOCKED */
+.locked{
+  opacity:.65;
+}
+
+.lock{
+  font-size:11px;
+  color:#dc2626;
+  margin-top:6px;
+}
+
+/* EMPTY */
+.empty{
+  text-align:center;
+  padding:30px 10px;
+  color:#777;
+  display:none;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  height:65px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  box-shadow:0 -3px 15px rgba(0,0,0,.08);
+}
+
+.nav-item{
+  text-align:center;
+  font-size:11px;
+  color:#777;
+}
+
+.nav-item div{
+  font-size:21px;
+  margin-bottom:3px;
+}
+
+.nav-item.active{
+  color:#4f46e5;
+  font-weight:bold;
+}
+
+.content{
+  padding-bottom:80px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="content">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <h1>📚 Study Material</h1>
+        <p>Apne courses ka complete study material</p>
+      </div>
+
+      <div class="profile">👤</div>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="search"
+      placeholder="Notes, PDF, video ya chapter search kare..."
+      onkeyup="searchMaterial()"
+    >
+  </div>
+
+  <!-- CATEGORY -->
+  <div class="categories">
+    <button class="active" onclick="filterMaterial('all',this)">All</button>
+    <button onclick="filterMaterial('pdf',this)">📄 PDFs</button>
+    <button onclick="filterMaterial('video',this)">🎥 Videos</button>
+    <button onclick="filterMaterial('notes',this)">📝 Notes</button>
+    <button onclick="filterMaterial('test',this)">🧠 Tests</button>
+  </div>
+
+  <!-- MY COURSES -->
+  <div class="section">
+
+    <div class="section-title">
+      <h2>🎓 My Courses</h2>
+      <span>View All</span>
+    </div>
+
+    <div class="course">
+
+      <div class="course-top">
+
+        <div class="course-icon">🌾</div>
+
+        <div>
+          <h3>Rajasthan Agriculture Complete Course</h3>
+          <small>32 Chapters • 145 Materials</small>
+        </div>
+
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+
+      <div class="course-bottom">
+        <span>65% Complete</span>
+        <button class="open-btn"
+        onclick="openCourse('Rajasthan Agriculture Complete Course')">
+          Open Course
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- COURSE MATERIAL -->
+  <div class="section">
+
+    <div class="section-title">
+      <h2>📖 Course Material</h2>
+      <span id="materialCount">6 Materials</span>
+    </div>
+
+    <div class="material-grid" id="materialGrid">
+
+      <div class="material" data-type="pdf" data-name="Rajasthan Agriculture Notes">
+        <div class="material-icon">📄</div>
+        <h3>Complete Notes</h3>
+        <p>PDF • 45 Pages</p>
+      </div>
+
+      <div class="material" data-type="video" data-name="Agriculture Video Lecture">
+        <div class="material-icon">🎥</div>
+        <h3>Video Lectures</h3>
+        <p>24 Videos</p>
+      </div>
+
+      <div class="material" data-type="notes" data-name="Important Short Notes">
+        <div class="material-icon">📝</div>
+        <h3>Short Notes</h3>
+        <p>Chapter Wise</p>
+      </div>
+
+      <div class="material" data-type="test" data-name="Practice Test">
+        <div class="material-icon">🧠</div>
+        <h3>Practice Tests</h3>
+        <p>15 Tests</p>
+      </div>
+
+      <div class="material" data-type="pdf" data-name="Previous Year Questions">
+        <div class="material-icon">📚</div>
+        <h3>PYQ</h3>
+        <p>Previous Year Questions</p>
+      </div>
+
+      <div class="material locked" data-type="video" data-name="Premium Video">
+        <div class="material-icon">🔒</div>
+        <h3>Premium Material</h3>
+        <p>Special Content</p>
+        <div class="lock">Course Required</div>
+      </div>
+
+    </div>
+
+    <div class="empty" id="empty">
+      😕 Material nahi mila
+    </div>
+
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+
+  <div class="nav-item">
+    <div>🏠</div>
+    Home
+  </div>
+
+  <div class="nav-item active">
+    <div>📚</div>
+    Material
+  </div>
+
+  <div class="nav-item">
+    <div>🎓</div>
+    Courses
+  </div>
+
+  <div class="nav-item">
+    <div>👥</div>
+    Groups
+  </div>
+
+  <div class="nav-item">
+    <div>👤</div>
+    Profile
+  </div>
+
+</div>
+
+<script>
+
+/* OPEN COURSE */
+function openCourse(courseName){
+
+  alert(
+    "🎓 " + courseName +
+    "\\n\\nCourse unlocked hai.\\nAapke saare notes, PDFs, videos aur tests yahan available hain."
+  );
+
+}
+
+
+/* FILTER */
+function filterMaterial(type,button){
+
+  const materials =
+    document.querySelectorAll(".material");
+
+  document
+    .querySelectorAll(".categories button")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+
+  let count = 0;
+
+  materials.forEach(material => {
+
+    if(type === "all" || material.dataset.type === type){
+
+      material.style.display = "block";
+      count++;
+
+    }else{
+
+      material.style.display = "none";
+
+    }
+
+  });
+
+  document.getElementById("materialCount").innerText =
+    count + " Materials";
+
+  document.getElementById("empty").style.display =
+    count === 0 ? "block" : "none";
+
+}
+
+
+/* SEARCH */
+function searchMaterial(){
+
+  const value =
+    document.getElementById("search")
+    .value
+    .toLowerCase();
+
+  const materials =
+    document.querySelectorAll(".material");
+
+  let count = 0;
+
+  materials.forEach(material => {
+
+    const name =
+      material.dataset.name.toLowerCase();
+
+    if(name.includes(value)){
+
+      material.style.display = "block";
+      count++;
+
+    }else{
+
+      material.style.display = "none";
+
+    }
+
+  });
+
+  document.getElementById("materialCount").innerText =
+    count + " Materials";
+
+  document.getElementById("empty").style.display =
+    count === 0 ? "block" : "none";
+
+}
+
+</script>
+
+</body>
+</html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html>

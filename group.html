@@ -1,0 +1,1533 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chanu Study - Groups</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#172033;
+}
+
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    color:white;
+    padding:22px 18px;
+    border-radius:0 0 25px 25px;
+}
+
+.header h1{
+    font-size:25px;
+}
+
+.header p{
+    margin-top:6px;
+    opacity:.9;
+}
+
+/* CONTAINER */
+.container{
+    max-width:700px;
+    margin:auto;
+    padding:18px;
+}
+
+/* GROUP CARD */
+.group-card{
+    background:white;
+    border-radius:20px;
+    padding:18px;
+    margin-bottom:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.group-top{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.group-icon{
+    width:55px;
+    height:55px;
+    border-radius:16px;
+    background:#eef2ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.group-info h2{
+    font-size:19px;
+}
+
+.group-info p{
+    color:#6b7280;
+    font-size:13px;
+    margin-top:4px;
+}
+
+/* BUTTON */
+button{
+    border:0;
+    cursor:pointer;
+}
+
+.doubt-btn{
+    width:100%;
+    margin-top:16px;
+    padding:14px;
+    border-radius:13px;
+    background:#4f46e5;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.doubt-btn:hover{
+    opacity:.9;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:100;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-box{
+    max-width:600px;
+    margin:30px auto;
+    background:white;
+    border-radius:22px;
+    padding:20px;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.close{
+    background:#f1f5f9;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    font-size:20px;
+}
+
+/* DOUBT GROUP */
+.doubt-banner{
+    background:linear-gradient(135deg,#eef2ff,#f5f3ff);
+    padding:16px;
+    border-radius:17px;
+    margin-bottom:15px;
+}
+
+.doubt-banner h3{
+    color:#4338ca;
+}
+
+.doubt-banner p{
+    color:#64748b;
+    font-size:13px;
+    margin-top:5px;
+}
+
+/* ACCESS */
+.access-box{
+    background:#f8fafc;
+    padding:16px;
+    border-radius:16px;
+    margin-top:15px;
+}
+
+.access-box h3{
+    margin-bottom:10px;
+}
+
+input,textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #dbe1ea;
+    border-radius:12px;
+    outline:none;
+    margin-top:8px;
+    font-size:14px;
+}
+
+textarea{
+    resize:none;
+    min-height:100px;
+}
+
+.primary{
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    background:#4f46e5;
+    color:white;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.secondary{
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    background:#e2e8f0;
+    color:#172033;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+/* DOUBT COMPOSER */
+.composer{
+    margin-top:15px;
+}
+
+.file-row{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.file-label{
+    flex:1;
+    background:#f1f5f9;
+    padding:12px;
+    border-radius:12px;
+    text-align:center;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.file-label input{
+    display:none;
+}
+
+.post-btn{
+    width:100%;
+    margin-top:10px;
+    padding:13px;
+    background:#16a34a;
+    color:white;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+/* DOUBTS */
+.doubt-card{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:15px;
+    margin-top:14px;
+}
+
+.user-line{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+}
+
+.user-name{
+    font-weight:bold;
+}
+
+.role{
+    color:#4f46e5;
+}
+
+.doubt-text{
+    margin-top:10px;
+    line-height:1.5;
+}
+
+.answer{
+    background:#ecfdf5;
+    padding:12px;
+    border-radius:12px;
+    margin-top:12px;
+}
+
+.answer strong{
+    color:#15803d;
+}
+
+.answer-btn{
+    margin-top:10px;
+    padding:9px 12px;
+    border-radius:10px;
+    background:#4f46e5;
+    color:white;
+}
+
+/* TEACHER PANEL */
+.teacher-panel{
+    display:none;
+    margin-top:15px;
+    background:#fff7ed;
+    padding:15px;
+    border-radius:16px;
+}
+
+.request{
+    background:white;
+    padding:12px;
+    border-radius:12px;
+    margin-top:10px;
+}
+
+.approve{
+    background:#16a34a;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    margin-top:8px;
+}
+
+.reject{
+    background:#dc2626;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    margin-top:8px;
+    margin-left:5px;
+}
+
+.empty{
+    text-align:center;
+    padding:25px;
+    color:#64748b;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <h1>📚 Chanu Study</h1>
+    <p>My Study Groups</p>
+</header>
+
+<div class="container">
+
+    <!-- GROUP -->
+    <div class="group-card">
+
+        <div class="group-top">
+            <div class="group-icon">🎓</div>
+
+            <div class="group-info">
+                <h2>REET Special Batch</h2>
+                <p>Teacher: Chanu Sir • 128 Members</p>
+            </div>
+        </div>
+
+        <!-- DOUBT GROUP BUTTON -->
+        <button class="doubt-btn"
+        onclick="openDoubtGroup()">
+            💬 Doubt Group खोलें
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- DOUBT GROUP MODAL -->
+
+<div class="modal" id="doubtModal">
+
+<div class="modal-box">
+
+    <div class="modal-head">
+        <h2>💬 Doubt Group</h2>
+
+        <button class="close"
+        onclick="closeDoubtGroup()">×</button>
+    </div>
+
+
+    <!-- INFO -->
+
+    <div class="doubt-banner">
+
+        <h3>📖 Student Doubt Community</h3>
+
+        <p>
+        यहाँ student अपने study doubts पूछ सकते हैं।
+        Photo और video भी भेज सकते हैं।
+        </p>
+
+    </div>
+
+
+    <!-- ACCESS BOX -->
+
+    <div class="access-box" id="accessBox">
+
+        <h3>🔐 Doubt Group Private है</h3>
+
+        <p style="font-size:13px;color:#64748b;">
+        Join करने के लिए Teacher Code डालें
+        या Teacher से approval request भेजें।
+        </p>
+
+        <input
+        type="text"
+        id="teacherCode"
+        placeholder="Teacher Code डालें">
+
+        <button
+        class="primary"
+        onclick="joinWithCode()">
+        🔑 Code से Join करें
+        </button>
+
+        <button
+        class="secondary"
+        onclick="sendJoinRequest()">
+        📩 Teacher से Approval माँगें
+        </button>
+
+    </div>
+
+
+    <!-- DOUBT AREA -->
+
+    <div id="doubtArea" style="display:none;">
+
+        <!-- STUDENT DOUBT POST -->
+
+        <div class="composer">
+
+            <h3>✍️ अपना Doubt पूछें</h3>
+
+            <textarea
+            id="doubtText"
+            placeholder="अपना सवाल यहाँ लिखें..."></textarea>
+
+
+            <div class="file-row">
+
+                <label class="file-label">
+                    📷 Photo
+                    <input
+                    type="file"
+                    accept="image/*"
+                    id="photoFile">
+                </label>
+
+
+                <label class="file-label">
+                    🎥 Video
+                    <input
+                    type="file"
+                    accept="video/*"
+                    id="videoFile">
+                </label>
+
+            </div>
+
+
+            <button
+            class="post-btn"
+            onclick="postDoubt()">
+            🚀 Doubt Post करें
+            </button>
+
+        </div>
+
+
+        <!-- TEACHER PANEL -->
+
+        <div
+        class="teacher-panel"
+        id="teacherPanel">
+
+            <h3>👨‍🏫 Teacher Control</h3>
+
+            <p style="font-size:13px;color:#64748b;margin-top:5px;">
+            Join requests को approve या reject करें।
+            </p>
+
+            <div id="requests"></div>
+
+        </div>
+
+
+        <!-- DOUBTS -->
+
+        <div id="doubts">
+
+            <div class="empty">
+                अभी कोई नया doubt नहीं है।
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+
+<script>
+
+/* =========================
+   DEMO DATA
+========================= */
+
+let isMember = false;
+
+/*
+Teacher code.
+Real app में इसे JavaScript में नहीं रखना चाहिए।
+Backend/database में secure रखना होगा।
+*/
+
+const TEACHER_CODE = "CHANU2026";
+
+
+/* =========================
+   OPEN / CLOSE
+========================= */
+
+function openDoubtGroup(){
+
+    document.getElementById("doubtModal").style.display="block";
+
+}
+
+function closeDoubtGroup(){
+
+    document.getElementById("doubtModal").style.display="none";
+
+}
+
+
+/* =========================
+   JOIN WITH TEACHER CODE
+========================= */
+
+function joinWithCode(){
+
+    const code =
+    document.getElementById("teacherCode").value.trim();
+
+    if(code === TEACHER_CODE){
+
+        isMember=true;
+
+        document.getElementById("accessBox").style.display="none";
+
+        document.getElementById("doubtArea").style.display="block";
+
+        alert("✅ आप Doubt Group में join हो गए!");
+
+        showTeacherPanel();
+
+    }
+
+    else{
+
+        alert("❌ Teacher Code गलत है!");
+
+    }
+
+}
+
+
+/* =========================
+   JOIN REQUEST
+========================= */
+
+function sendJoinRequest(){
+
+    alert(
+        "📩 आपकी Join Request Teacher को भेज दी गई है।\n\nTeacher approve करने के बाद आप Doubt Group में प्रवेश कर सकेंगे।"
+    );
+
+}
+
+
+/* =========================
+   TEACHER PANEL
+========================= */
+
+function showTeacherPanel(){
+
+    /*
+    Demo में teacher panel दिखाया जा रहा है।
+    Real app में role database से आएगा।
+    */
+
+    const isTeacher = true;
+
+    if(!isTeacher) return;
+
+    document.getElementById("teacherPanel").style.display="block";
+
+    const requests =
+    document.getElementById("requests");
+
+    requests.innerHTML = `
+
+        <div class="request">
+
+            <strong>Rahul Kumar</strong>
+
+            <p style="font-size:13px;color:#64748b;">
+            Class 12 • Join Request
+            </p>
+
+            <button
+            class="approve"
+            onclick="approveStudent(this)">
+            Approve
+            </button>
+
+            <button
+            class="reject"
+            onclick="rejectStudent(this)">
+            Reject
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   APPROVE STUDENT
+========================= */
+
+function approveStudent(button){
+
+    button.parentElement.innerHTML = `
+
+        <strong>Rahul Kumar</strong>
+
+        <p style="color:#16a34a;margin-top:5px;">
+        ✅ Approved
+        </p>
+
+    `;
+
+    alert("Student को Doubt Group में approve कर दिया गया।");
+
+}
+
+
+/* =========================
+   REJECT STUDENT
+========================= */
+
+function rejectStudent(button){
+
+    button.parentElement.remove();
+
+    alert("Student की request reject कर दी गई।");
+
+}
+
+
+/* =========================
+   POST DOUBT
+========================= */
+
+function postDoubt(){
+
+    if(!isMember){
+
+        alert("पहले Doubt Group join करें।");
+
+        return;
+    }
+
+
+    const text =
+    document.getElementById("doubtText").value.trim();
+
+    const photo =
+    document.getElementById("photoFile").files[0];
+
+    const video =
+    document.getElementById("videoFile").files[0];
+
+
+    if(!text && !photo && !video){
+
+        alert("कृपया अपना doubt लिखें या Photo/Video लगाएँ।");
+
+        return;
+    }
+
+
+    const doubtBox =
+    document.getElementById("doubts");
+
+
+    const empty =
+    doubtBox.querySelector(".empty");
+
+    if(empty){
+
+        empty.remove();
+
+    }
+
+
+    let mediaHTML="";
+
+
+    if(photo){
+
+        mediaHTML += `
+            <p style="margin-top:10px;">
+            📷 Photo attached: ${photo.name}
+            </p>
+        `;
+
+    }
+
+
+    if(video){
+
+        mediaHTML += `
+            <p style="margin-top:10px;">
+            🎥 Video attached: ${video.name}
+            </p>
+        `;
+
+    }
+
+
+    const doubt = document.createElement("div");
+
+    doubt.className="doubt-card";
+
+
+    doubt.innerHTML = `
+
+        <div class="user-line">
+
+            <span class="user-name">
+            👨‍🎓 You
+            </span>
+
+            <span class="role">
+            Student
+            </span>
+
+        </div>
+
+
+        <div class="doubt-text">
+            ${escapeHTML(text)}
+        </div>
+
+        ${mediaHTML}
+
+
+        <button
+        class="answer-btn"
+        onclick="answerDoubt(this)">
+        💡 Answer करें
+        </button>
+
+    `;
+
+
+    doubtBox.prepend(doubt);
+
+
+    document.getElementById("doubtText").value="";
+
+    document.getElementById("photoFile").value="";
+
+    document.getElementById("videoFile").value="";
+
+
+    alert("✅ आपका Doubt पोस्ट हो गया!");
+
+}
+
+
+/* =========================
+   ANSWER DOUBT
+========================= */
+
+function answerDoubt(button){
+
+    const answer =
+    prompt("अपना answer लिखें:");
+
+    if(!answer) return;
+
+
+    const card =
+    button.parentElement;
+
+
+    const answerBox =
+    document.createElement("div");
+
+    answerBox.className="answer";
+
+
+    answerBox.innerHTML = `
+
+        <strong>👨‍🏫 Answer</strong>
+
+        <p style="margin-top:6px;">
+        ${escapeHTML(answer)}
+        </p>
+
+    `;
+
+
+    card.appendChild(answerBox);
+
+
+    button.remove();
+
+}
+
+
+/* =========================
+   SAFE TEXT
+========================= */
+
+function escapeHTML(text){
+
+    return text
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html><!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chanu Study - Groups</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+  color:white;
+  padding:22px 18px 28px;
+  border-radius:0 0 25px 25px;
+}
+
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header h1{
+  font-size:25px;
+}
+
+.header-sub{
+  margin-top:7px;
+  opacity:.85;
+  font-size:14px;
+}
+
+.bell{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.container{
+  padding:16px;
+  max-width:700px;
+  margin:auto;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:0 5px 18px rgba(20,30,60,.07);
+}
+
+.card h2{
+  font-size:18px;
+  margin-bottom:12px;
+}
+
+.group-code{
+  background:#f0efff;
+  border:2px dashed #6366f1;
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+}
+
+.code{
+  font-size:28px;
+  font-weight:bold;
+  letter-spacing:4px;
+  color:#4f46e5;
+  margin:8px 0;
+}
+
+button{
+  border:0;
+  border-radius:12px;
+  padding:12px 16px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.primary{
+  background:#4f46e5;
+  color:white;
+}
+
+.secondary{
+  background:#eef2ff;
+  color:#4338ca;
+}
+
+.danger{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.success{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.input{
+  width:100%;
+  padding:13px;
+  border:1px solid #d8dce7;
+  border-radius:12px;
+  outline:none;
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+.join-box{
+  display:flex;
+  gap:8px;
+}
+
+.join-box input{
+  flex:1;
+  margin:0;
+}
+
+.notification{
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  border-radius:14px;
+  padding:13px;
+  margin-bottom:10px;
+}
+
+.notification strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.student{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px;
+  border-bottom:1px solid #eee;
+}
+
+.student:last-child{
+  border-bottom:0;
+}
+
+.avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#e0e7ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  color:#4338ca;
+}
+
+.student-info{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.doubt{
+  border:1px solid #e5e7eb;
+  padding:13px;
+  border-radius:14px;
+  margin-bottom:10px;
+}
+
+.doubt-title{
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.doubt-meta{
+  color:#777;
+  font-size:12px;
+  margin-bottom:9px;
+}
+
+.reply{
+  background:#f8fafc;
+  padding:10px;
+  border-radius:10px;
+  margin-top:8px;
+  font-size:14px;
+}
+
+.call-btn{
+  background:#16a34a;
+  color:white;
+  padding:9px 12px;
+}
+
+.empty{
+  text-align:center;
+  color:#777;
+  padding:10px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:10;
+}
+
+.modal-box{
+  background:white;
+  width:100%;
+  max-width:400px;
+  border-radius:20px;
+  padding:20px;
+}
+
+.modal-box h2{
+  margin-bottom:12px;
+}
+
+.video-area{
+  background:#111827;
+  height:230px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:50px;
+  margin:15px 0;
+}
+
+.close{
+  width:100%;
+  background:#e5e7eb;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <h1>👥 My Groups</h1>
+      <div class="header-sub">Chanu Study • Teacher & Student Groups</div>
+    </div>
+
+    <div class="bell" onclick="showNotifications()">
+      🔔
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- TEACHER GROUP CONTROL -->
+  <div class="card">
+    <h2>👨‍🏫 Teacher Group Control</h2>
+
+    <div class="group-code">
+      <div>Current Group Code</div>
+      <div class="code" id="groupCode">CS8472</div>
+
+      <button class="secondary" onclick="changeCode()">
+        🔄 Change Group Code
+      </button>
+    </div>
+
+    <p style="font-size:13px;color:#777;margin-top:10px;">
+      Code बदलने पर पुराना code invalid हो जाएगा।
+    </p>
+  </div>
+
+
+  <!-- JOIN GROUP -->
+  <div class="card">
+    <h2>🔐 Join Group</h2>
+
+    <div class="join-box">
+      <input
+        id="joinCode"
+        class="input"
+        placeholder="Group Code डालें"
+      >
+
+      <button class="primary" onclick="requestJoin()">
+        Join
+      </button>
+    </div>
+
+    <p id="joinMessage"
+       style="font-size:13px;margin-top:10px;"></p>
+  </div>
+
+
+  <!-- NOTIFICATIONS -->
+  <div class="card" id="notificationCard">
+    <h2>🔔 Notifications</h2>
+
+    <div class="notification">
+      <strong>👨‍🎓 Rahul ने join request भेजी</strong>
+      <span style="font-size:13px;color:#666;">
+        Class 10 • 2 minutes ago
+      </span>
+
+      <div class="actions">
+        <button class="success" onclick="approveStudent()">
+          ✓ Accept
+        </button>
+
+        <button class="danger" onclick="rejectStudent(this)">
+          ✕ Reject
+        </button>
+      </div>
+    </div>
+
+    <div id="approvedMessage"></div>
+  </div>
+
+
+  <!-- STUDENTS -->
+  <div class="card">
+    <h2>👨‍🎓 Group Students</h2>
+
+    <div class="student">
+      <div class="student-info">
+        <div class="avatar">R</div>
+        <div>
+          <strong>Rahul</strong>
+          <div style="font-size:12px;color:#777;">
+            Class 10
+          </div>
+        </div>
+      </div>
+
+      <button class="call-btn"
+              onclick="startCall('Rahul')">
+        📹 Call
+      </button>
+    </div>
+
+    <div class="student">
+      <div class="student-info">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Aman</strong>
+          <div style="font-size:12px;color:#777;">
+            Class 10
+          </div>
+        </div>
+      </div>
+
+      <button class="call-btn"
+              onclick="startCall('Aman')">
+        📹 Call
+      </button>
+    </div>
+  </div>
+
+
+  <!-- DOUBT SECTION -->
+  <div class="card">
+    <h2>❓ Doubt Section</h2>
+
+    <input
+      id="doubtText"
+      class="input"
+      placeholder="Apna doubt likhein..."
+    >
+
+    <button class="primary" onclick="postDoubt()">
+      📤 Doubt Post Karein
+    </button>
+
+    <div id="doubtList" style="margin-top:15px;">
+
+      <div class="doubt">
+        <div class="doubt-title">
+          📚 Maths ka ye question kaise solve hoga?
+        </div>
+
+        <div class="doubt-meta">
+          Rahul • 5 min ago
+        </div>
+
+        <button class="secondary"
+                onclick="replyDoubt(this)">
+          💬 Answer
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- NOTIFICATION MODAL -->
+<div class="modal" id="notificationModal">
+  <div class="modal-box">
+
+    <h2>🔔 Notifications</h2>
+
+    <div class="notification">
+      <strong>New Join Request</strong>
+      <p style="font-size:14px;">
+        Rahul आपके group में join होना चाहता है।
+      </p>
+
+      <div class="actions">
+        <button class="success" onclick="approveStudent()">
+          Accept
+        </button>
+
+        <button class="danger" onclick="closeModal()">
+          Reject
+        </button>
+      </div>
+    </div>
+
+    <button class="close" onclick="closeModal()">
+      Close
+    </button>
+
+  </div>
+</div>
+
+
+<!-- VIDEO CALL MODAL -->
+<div class="modal" id="callModal">
+  <div class="modal-box">
+
+    <h2>📹 Video Call</h2>
+
+    <p id="callingText">
+      Calling student...
+    </p>
+
+    <div class="video-area">
+      👤
+    </div>
+
+    <p style="text-align:center;color:#777;font-size:13px;">
+      Video call request भेजी जा रही है
+    </p>
+
+    <br>
+
+    <button class="danger close"
+            onclick="endCall()">
+      End Call
+    </button>
+
+  </div>
+</div>
+
+
+<script>
+
+let groupCode = "CS8472";
+
+
+/* CHANGE GROUP CODE */
+function changeCode(){
+
+  const newCode =
+    "CS" +
+    Math.floor(1000 + Math.random() * 9000);
+
+  groupCode = newCode;
+
+  document.getElementById("groupCode")
+    .innerText = newCode;
+
+  alert(
+    "✅ नया Group Code बन गया!\n\n" +
+    "New Code: " + newCode
+  );
+}
+
+
+/* JOIN REQUEST */
+function requestJoin(){
+
+  const entered =
+    document.getElementById("joinCode").value
+    .trim()
+    .toUpperCase();
+
+  const msg =
+    document.getElementById("joinMessage");
+
+  if(!entered){
+
+    msg.innerText =
+      "⚠️ पहले Group Code डालें।";
+
+    msg.style.color = "#dc2626";
+    return;
+  }
+
+  if(entered === groupCode){
+
+    msg.innerText =
+      "✅ Join request teacher को भेज दी गई है। Approval का इंतजार करें।";
+
+    msg.style.color = "#15803d";
+
+  }else{
+
+    msg.innerText =
+      "❌ गलत Group Code।";
+
+    msg.style.color = "#dc2626";
+  }
+}
+
+
+/* NOTIFICATIONS */
+function showNotifications(){
+
+  document.getElementById("notificationModal")
+    .style.display = "flex";
+}
+
+function closeModal(){
+
+  document.getElementById("notificationModal")
+    .style.display = "none";
+}
+
+
+/* APPROVE STUDENT */
+function approveStudent(){
+
+  document.getElementById("approvedMessage").innerHTML = `
+    <div style="
+      background:#dcfce7;
+      color:#15803d;
+      padding:12px;
+      border-radius:12px;
+      margin-top:10px;
+    ">
+      ✅ Rahul को group में approve कर दिया गया।
+    </div>
+  `;
+
+  closeModal();
+}
+
+
+/* REJECT */
+function rejectStudent(button){
+
+  button.closest(".notification").innerHTML = `
+    <strong>❌ Join request rejected</strong>
+    <span style="font-size:13px;color:#777;">
+      Request reject कर दी गई।
+    </span>
+  `;
+}
+
+
+/* VIDEO CALL */
+function startCall(student){
+
+  document.getElementById("callingText")
+    .innerText =
+    "📞 " + student + " को video call request भेजी जा रही है...";
+
+  document.getElementById("callModal")
+    .style.display = "flex";
+}
+
+
+/* END CALL */
+function endCall(){
+
+  document.getElementById("callModal")
+    .style.display = "none";
+
+  alert("📞 Call ended");
+}
+
+
+/* POST DOUBT */
+function postDoubt(){
+
+  const input =
+    document.getElementById("doubtText");
+
+  const text = input.value.trim();
+
+  if(!text){
+
+    alert("पहले अपना doubt लिखें।");
+    return;
+  }
+
+  const doubtList =
+    document.getElementById("doubtList");
+
+  const div =
+    document.createElement("div");
+
+  div.className = "doubt";
+
+  div.innerHTML = `
+    <div class="doubt-title">
+      ❓ ${text}
+    </div>
+
+    <div class="doubt-meta">
+      You • अभी
+    </div>
+
+    <button class="secondary"
+            onclick="replyDoubt(this)">
+      💬 Answer
+    </button>
+  `;
+
+  doubtList.prepend(div);
+
+  input.value = "";
+}
+
+
+/* REPLY */
+function replyDoubt(button){
+
+  const reply =
+    prompt("अपना answer लिखें:");
+
+  if(reply && reply.trim()){
+
+    const div =
+      document.createElement("div");
+
+    div.className = "reply";
+
+    div.innerHTML =
+      "👨‍🏫 <strong>Teacher:</strong> " +
+      reply;
+
+    button.parentElement.appendChild(div);
+  }
+}
+
+</script>
+
+</body>
+</html>

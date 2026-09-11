@@ -1,0 +1,426 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chanu Study</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f5f7fb;
+  color:#172033;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+  color:white;
+  padding:18px 16px 25px;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.menu{
+  font-size:25px;
+}
+
+/* HERO */
+.hero{
+  margin-top:25px;
+}
+
+.hero h1{
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:15px;
+  opacity:.9;
+  line-height:1.5;
+}
+
+.search{
+  margin-top:18px;
+  background:white;
+  border-radius:12px;
+  padding:13px;
+  color:#777;
+}
+
+/* MAIN */
+main{
+  padding:20px 15px;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:20px 0 13px;
+}
+
+.section-title h2{
+  font-size:20px;
+}
+
+.section-title span{
+  color:#4f46e5;
+  font-size:14px;
+}
+
+/* QUICK MENU */
+.quick{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.card{
+  background:white;
+  padding:18px 14px;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.icon{
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.card h3{
+  font-size:16px;
+  margin-bottom:5px;
+}
+
+.card p{
+  font-size:12px;
+  color:#777;
+}
+
+/* COURSE */
+.course{
+  background:white;
+  border-radius:16px;
+  margin-bottom:14px;
+  overflow:hidden;
+  box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.course-img{
+  height:120px;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:42px;
+}
+
+.course-content{
+  padding:15px;
+}
+
+.course-content h3{
+  margin-bottom:7px;
+}
+
+.course-content p{
+  font-size:13px;
+  color:#777;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:9px 15px;
+  background:#4f46e5;
+  color:white;
+  border-radius:8px;
+  text-decoration:none;
+  font-size:13px;
+}
+
+/* LIVE */
+.live{
+  background:linear-gradient(135deg,#ef4444,#dc2626);
+  color:white;
+  padding:18px;
+  border-radius:16px;
+  margin-top:10px;
+}
+
+.live h3{
+  margin-bottom:7px;
+}
+
+.live p{
+  font-size:13px;
+  opacity:.9;
+}
+
+/* FOOTER */
+footer{
+  background:#111827;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+  margin-top:30px;
+}
+
+footer p{
+  font-size:13px;
+  color:#aaa;
+  margin-top:8px;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  height:62px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  box-shadow:0 -3px 15px rgba(0,0,0,.1);
+}
+
+.nav-item{
+  text-align:center;
+  font-size:12px;
+  color:#777;
+}
+
+.nav-item.active{
+  color:#4f46e5;
+  font-weight:bold;
+}
+
+.nav-icon{
+  font-size:21px;
+  display:block;
+  margin-bottom:3px;
+}
+
+body{
+  padding-bottom:70px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="top">
+    <div class="logo">📚 Chanu Study</div>
+    <div class="menu">☰</div>
+  </div>
+
+  <div class="hero">
+    <h1>पढ़ाई अब आसान है 🚀</h1>
+    <p>
+      Notes, Courses, Mock Tests, Live Classes और Doubt Support —
+      सब कुछ एक ही जगह।
+    </p>
+
+    <div class="search">
+      🔍 &nbsp; Search Courses, Notes...
+    </div>
+  </div>
+
+</header>
+
+
+<main>
+
+  <!-- QUICK ACCESS -->
+  <div class="section-title">
+    <h2>Quick Access</h2>
+    <span>View All</span>
+  </div>
+
+  <div class="quick">
+
+    <div class="card">
+      <div class="icon">📚</div>
+      <h3>Notes</h3>
+      <p>अपने study notes पढ़ें</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📝</div>
+      <h3>Mock Test</h3>
+      <p>अपनी तैयारी check करें</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">👥</div>
+      <h3>Student Group</h3>
+      <p>अपने teacher group से जुड़ें</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">❓</div>
+      <h3>Doubt Section</h3>
+      <p>अपना doubt पूछें</p>
+    </div>
+
+  </div>
+
+
+  <!-- COURSES -->
+  <div class="section-title">
+    <h2>Popular Courses</h2>
+    <span>See All</span>
+  </div>
+
+  <div class="course">
+
+    <div class="course-img">
+      🎓
+    </div>
+
+    <div class="course-content">
+      <h3>Competitive Exam Preparation</h3>
+      <p>
+        Complete study material, video classes और mock tests.
+      </p>
+
+      <a href="#" class="btn">View Course</a>
+    </div>
+
+  </div>
+
+
+  <div class="course">
+
+    <div class="course-img">
+      📖
+    </div>
+
+    <div class="course-content">
+      <h3>Hindi Medium Study Course</h3>
+      <p>
+        Hindi में आसान तरीके से अपनी तैयारी करें।
+      </p>
+
+      <a href="#" class="btn">View Course</a>
+    </div>
+
+  </div>
+
+
+  <!-- LIVE CLASS -->
+  <div class="section-title">
+    <h2>Live Classes</h2>
+  </div>
+
+  <div class="live">
+    <h3>🔴 Live Class Coming Soon</h3>
+    <p>
+      Teacher द्वारा ली जाने वाली live classes यहाँ दिखाई जाएंगी।
+    </p>
+  </div>
+
+
+  <!-- STUDENT SUPPORT -->
+  <div class="section-title">
+    <h2>Student Support</h2>
+  </div>
+
+  <div class="quick">
+
+    <div class="card">
+      <div class="icon">💬</div>
+      <h3>Doubt Ask करें</h3>
+      <p>अपने सवाल teacher से पूछें</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📢</div>
+      <h3>Announcements</h3>
+      <p>Important updates देखें</p>
+    </div>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <strong>📚 Chanu Study</strong>
+
+  <p>
+    Learn • Practice • Succeed
+  </p>
+
+  <p>
+    © 2026 Chanu Study
+  </p>
+
+</footer>
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<div class="bottom-nav">
+
+  <div class="nav-item active">
+    <span class="nav-icon">🏠</span>
+    Home
+  </div>
+
+  <div class="nav-item">
+    <span class="nav-icon">📚</span>
+    Courses
+  </div>
+
+  <div class="nav-item">
+    <span class="nav-icon">📝</span>
+    Tests
+  </div>
+
+  <div class="nav-item">
+    <span class="nav-icon">👤</span>
+    Profile
+  </div>
+
+</div>
+
+</body>
+</html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html>
