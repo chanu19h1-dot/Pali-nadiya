@@ -1,0 +1,49 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CHANU STUDY PRO</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</head>
+<body class="bg-[#eef2ff] min-h-screen font-sans">
+<div id="login" class="min-h-screen flex items-center justify-center p-4">
+<div class="bg-white w-full max-w-sm rounded-[28px] shadow-2xl p-7">
+<h1 class="text-3xl font-black text-center">CHANU STUDY <span class="text-indigo-600">PRO</span></h1>
+<p class="text-center text-gray-500 text-xs mt-1">Firebase LIVE - Real OTP Ready</p>
+<div id="recaptcha-container" class="mt-4"></div>
+<input id="phone" type="tel" value="+91" class="w-full mt-3 border-2 rounded-xl px-4 py-3 text-lg">
+<button id="sendBtn" onclick="sendOTP()" class="w-full mt-3 bg-indigo-600 text-white rounded-xl py-3 font-bold">Real OTP Bhejo</button>
+<div class="flex items-center my-3"><div class="flex-1 h-[1px] bg-gray-200"></div><span class="px-2 text-[10px] text-gray-400">OR TEST</span><div class="flex-1 h-[1px] bg-gray-200"></div></div>
+<button onclick="document.getElementById('testBox').classList.toggle('hidden')" class="w-full bg-gray-100 rounded-xl py-2 text-sm font-semibold">Test OTP 123456</button>
+<div id="otpBox" class="hidden mt-3"><input id="otp" placeholder="OTP" class="w-full border-2 rounded-xl px-4 py-3 text-center tracking-[6px] text-xl font-bold"><button onclick="verifyOTP()" class="w-full mt-2 bg-green-600 text-white rounded-xl py-3 font-bold">Verify & Login</button></div>
+<div id="testBox" class="hidden mt-3"><input id="testOtp" placeholder="123456 daalo" class="w-full border rounded-xl px-4 py-2"><button onclick="if(document.getElementById('testOtp').value==='123456'){loginOK('Test User')} else alert('123456 daalo')" class="w-full mt-2 bg-black text-white rounded-xl py-2">Test Login</button></div>
+</div></div>
+<div id="app" class="hidden"><header class="bg-indigo-600 text-white p-4 flex justify-between"><h2 class="font-black">CHANU STUDY PRO</h2><span id="uPhone" class="text-xs bg-white/20 px-2 py-1 rounded"></span></header>
+<div class="p-4 grid grid-cols-2 gap-3 max-w-2xl mx-auto"><div onclick="showNotes()" class="bg-white rounded-2xl p-5 text-center shadow border"><div class="text-2xl">📝</div><b>Notes</b></div><div class="bg-white rounded-2xl p-5 text-center shadow border"><div class="text-2xl">📚</div><b>Free</b></div><div class="bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-2xl p-5 text-center shadow"><div class="text-2xl">💎</div><b>Paid</b></div><div class="bg-white rounded-2xl p-5 text-center shadow border"><div class="text-2xl">🧠</div><b>Quiz</b></div></div>
+<div class="max-w-2xl mx-auto p-4"><div class="bg-white rounded-2xl p-4 shadow border"><h3 class="font-bold">💬 Group Doubt</h3><div id="doubts" class="mt-2 space-y-2"></div><div class="flex gap-2 mt-3"><input id="dInput" placeholder="Doubt..." class="flex-1 border rounded-xl px-3 py-2 text-sm"><button onclick="addD()" class="bg-indigo-600 text-white px-4 rounded-xl">Send</button></div></div>
+<div class="bg-black text-white rounded-2xl p-4 mt-4"><h3 class="font-bold">🔐 Admin - chanu123</h3><div class="flex gap-2 mt-2"><input id="aPass" type="password" placeholder="Password" class="flex-1 rounded-xl px-3 py-2 text-black text-sm"><button onclick="if(document.getElementById('aPass').value==='chanu123'){document.getElementById('aBox').classList.remove('hidden')} else alert('wrong')" class="bg-indigo-600 px-4 rounded-xl text-sm">Login</button></div><div id="aBox" class="hidden mt-3 bg-white/10 p-3 rounded-xl"><input id="nT" placeholder="Title" class="w-full rounded-xl px-3 py-2 text-black text-sm"><input id="nL" placeholder="Link" class="w-full mt-2 rounded-xl px-3 py-2 text-black text-sm"><select id="nC" class="w-full mt-2 rounded-xl px-3 py-2 text-black text-sm"><option>notes</option><option>free</option><option>paid</option></select><button onclick="addN()" class="w-full mt-2 bg-green-600 rounded-xl py-2 text-sm font-bold">Add</button></div></div><div id="content" class="mt-4 pb-20"></div></div></div>
+<script>
+const firebaseConfig={apiKey:"AIzaSyBObcDZZIAl2KqVkbxvAzAydiyZlhBcLdk",authDomain:"chanu-study-53531.firebaseapp.com",projectId:"chanu-study-53531",storageBucket:"chanu-study-53531.appspot.com",appId:"1:000000:web:chanu"};
+firebase.initializeApp(firebaseConfig); let conf=null; let recaptcha=null;
+window.onload=()=>{recaptcha=new firebase.auth.RecaptchaVerifier('recaptcha-container',{size:'normal'}); recaptcha.render();};
+function sendOTP(){let ph=document.getElementById('phone').value; document.getElementById('sendBtn').innerText='Bhej rahe...'; firebase.auth().signInWithPhoneNumber(ph,recaptcha).then(r=>{conf=r; document.getElementById('otpBox').classList.remove('hidden'); alert('OTP bheja!'); document.getElementById('sendBtn').innerText='OTP Bheja';}).catch(e=>{alert(e.message+'\nTip: Netlify domain ko Firebase Authorized domains me add karo'); document.getElementById('sendBtn').innerText='Real OTP Bhejo';});}
+function verifyOTP(){conf.confirm(document.getElementById('otp').value).then(u=>loginOK(u.user.phoneNumber)).catch(()=>alert('Galat OTP'));}
+function loginOK(p){document.getElementById('login').classList.add('hidden'); document.getElementById('app').classList.remove('hidden'); document.getElementById('uPhone').innerText=p; render();}
+let notes=JSON.parse(localStorage.getItem('n')||'[]'); let doubts=JSON.parse(localStorage.getItem('d')||'[]');
+function addD(){let v=document.getElementById('dInput').value; if(!v)return; doubts.push({t:v}); localStorage.setItem('d',JSON.stringify(doubts)); document.getElementById('dInput').value=''; render();}
+function addN(){let t=document.getElementById('nT').value; let l=document.getElementById('nL').value; if(!t||!l)return; notes.push({title:t,link:l}); localStorage.setItem('n',JSON.stringify(notes)); alert('Added'); render();}
+function showNotes(){let c=document.getElementById('content'); c.innerHTML='<h3 class=font-bold>All Notes</h3>'+notes.map(n=>'<div class=bg-white p-3 rounded-xl border mb-2 flex justify-between><span>'+n.title+'</span><a href='+n.link+' target=_blank class=bg-indigo-600 text-white px-3 py-1 rounded-lg text-xs>Open</a></div>').join('');}
+function render(){document.getElementById('doubts').innerHTML=doubts.map(d=>'<div class=bg-gray-100 p-2 rounded-xl text-sm>'+d.t+'</div>').join(''); showNotes();}
+</script></body></html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html>
